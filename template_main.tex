@@ -1,0 +1,114 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Document description here
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ****************** doc definition ******************
+\documentclass[11pt,a4paper,headsepline,ngerman=ngerman-x-latest]{scrreprt}
+%\documentclass[11pt,a4paper,headsepline,ngerman=ngerman-x-latest, openright, twoside]{scrreprt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ****************** preamble ******************
+\setlength{\parindent}{0cm} % Ausschalten der Absatzeinrückung im gesamten document
+\setcounter{secnumdepth}{3} % Angabe, wie tief die Überschriften nummeriert werden sollen
+\setcounter{tocdepth}{3} %Angabe, welche Überschriften noch im Inhaltsverzeichnis angezeigt werden sollen
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ****************** used packages ******************
+\usepackage[left=3.0cm,right=3cm,top=3cm,bottom=3cm]{geometry} % Einstellung der Seitengeometrie
+%\evensidemargin0mm % Rand der geraden Seiten
+%\oddsidemargin6mm % Rand der ungeraden Seiten
+\usepackage[onehalfspacing]{setspace}
+\usepackage[section]{placeins} % verhindert, dass floating Objekte (z.B. Bilder) durch sections wandern
+
+\usepackage[ngerman]{babel}
+%\usepackage[ansinew]{inputenc} %Deutsche Silbentrennung Windoof
+\usepackage[latin1]{inputenc} %Deutsche Silbentrennung Windoof und Linux
+\usepackage[T1]{fontenc} % Erweitert die Anzahl an Zeichen und erleichtert die Silbentrennung
+
+\usepackage{color} % color für farbige Schriften und Hintergründe 
+\usepackage{url} % zum Erstellen von URLs (\url{http:\\bla.de} verwenden)
+\usepackage{longtable} % Damit Tabellen auch über eine Seite hinausgehen können
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{rotating}
+\usepackage{cite}
+\usepackage{subfigure}
+%\usepackage{ltxtable}
+\usepackage{units}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ************* own environment defintions *************
+\usepackage[automark, komastyle, nouppercase]{scrpage2}
+
+% ************* format the header*************
+\setlength{\headheight}{1.5\baselineskip}
+\pagestyle{scrheadings} % pages with header
+\clearscrheadings 
+\clearscrplain 
+\ohead{\pagemark} % header outside: page number 
+\ihead{\headmark} % header inside: chapter and section titles 
+\ofoot[\pagemark]{} % footer outsite: page numbers on plain pages 
+\automark[chapter]{chapter} %[right]{left} 
+\setheadsepline{.4pt}[\color{black}] % configures the line below the header 
+
+%Hyperref // creates links in the table of content
+\usepackage[colorlinks,
+			pdfpagelabels,
+			pdfstartview = FitH,
+			bookmarksopen = true,
+			bookmarksnumbered = true,
+			linkcolor = black,
+			plainpages = false,
+			hypertexnames = false,
+			citecolor = black,
+	]{hyperref}
+	
+\numberwithin{equation}{chapter}
+\addto\captionsngerman{\renewcommand\figurename{Abb.}}
+\renewcommand{\thefigure}{\arabic{chapter}.\arabic{figure}}
+
+\hyphenation{Sil-ben-tren-nung} %forced hyphenation
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ****************** the doc itself ******************
+\begin{document}
+
+%%% Title. Use either TitleA or TitleB
+% TitleA
+\input{template_titlepage}
+
+%% TitleB
+%\title{Title}
+%\author{Jon Doe}
+%\date{\today}
+%\label{titlepage}
+%\maketitle
+
+%%% table of content
+\pagenumbering{Roman}
+\clearpage
+\setcounter{page}{0}
+\newpage
+\pdfbookmark[1]{Inhaltsverzeichnis}{toc}
+\tableofcontents 
+
+%%% doc chapters
+\clearpage
+\setcounter{page}{0}
+\setcounter{table}{0}
+\setcounter{secnumdepth}{3}
+\setcounter{chapter}{0}
+\pagenumbering{arabic}
+% input chapters here
+\input{template_chapter}
+
+%%% Appendix (if needed)
+\setcounter{figure}{0}
+% input appendix here
+\input{template_appendix}
+
+\end{document}
